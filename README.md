@@ -5,6 +5,14 @@ Esse software é um visualizador de dados volumétricos cujo principal objetivo é 
 ### Informações relevantes
 * Desenvolvido em Python e GLSL
 * Utiliza as bibliotecas: 
+    * Numpy
+    * Pyglm
+    * DearPyGUI
+    * PyOpenGL
+    * Glfw
+    * Pynrrd
+    * Pytest
+    * Ruff
 * Volumes suportados: .raw, .nhdr
 * Funções de transferência suportadas: 1D linear .tfl
 
