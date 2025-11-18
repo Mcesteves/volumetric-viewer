@@ -38,7 +38,14 @@ E para executar o programa, após a instalação das dependências, rode:
 ```
 uv run volumetric-viewer
 ```
+Caso ocorre erro, verifique se está na pasta correta (..\volumetric-viewer\volumetric-viewer)
 
 ### Ferramentas para desenvolvedores
 
-Nesse projeto, foram utilizadas algumas ferramentas para auxiliar no processo de desenvolvimento. Para saber mais leia o documento ####.
+Nesse projeto, foram utilizadas algumas ferramentas para auxiliar no processo de desenvolvimento.
+
+#### uv
+
+#### Pytest
+
+#### Ruff
