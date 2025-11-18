@@ -5,7 +5,8 @@ uniform vec3 cameraPos;
 uniform sampler1D transferFuncTex;
 uniform vec3 volumeScale;  // scale used to adapt volume to cube 1x1x1  
 uniform vec3 volumeColor; // color when in isovalue view
-uniform float isovalueLimit;
+uniform float minIsovalueLimit;
+uniform float maxIsovalueLimit;
 uniform int viewMode; // o for isovalue view / 1 for transfer func
 
 in vec3 fragPos;               
@@ -51,7 +52,7 @@ void main() {
         vec4 sampleColor;
 
         if (viewMode == 0) {
-            sampleColor = (density > isovalueLimit) ? vec4(volumeColor, density) : vec4(volumeColor, 0.0);
+            sampleColor = (density > minIsovalueLimit && density<maxIsovalueLimit) ? vec4(volumeColor, density) : vec4(volumeColor, 0.0);
         } else {
             sampleColor = transferFunction(density);
         }

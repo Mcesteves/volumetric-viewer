@@ -17,7 +17,8 @@ from volumetric_viewer.arcball_camera import ArcballCamera
 from volumetric_viewer.event_system import (
     ColorChangedEvent,
     EventQueue,
-    IsovalueChangedEvent,
+    MaxIsovalueChangedEvent,
+    MinIsovalueChangedEvent,
     NHDRLoadedEvent,
     RawLoadedEvent,
     TransferFunctionExportedEvent,
@@ -120,7 +121,8 @@ def main():
     volume = None
     view_mode = 0
     isovalue_min = 0
-    color = (255,0,0)
+    isovalue_max = 255
+    color = (1, 100/255.0, 100/255.0)
 
     glViewport(0, 0, WINDOW_WIDTH, WINDOW_HEIGHT)
 
@@ -155,8 +157,10 @@ def main():
                 print(event)
             elif isinstance(event, ColorChangedEvent):
                 color = event.color
-            elif isinstance(event, IsovalueChangedEvent):
+            elif isinstance(event, MinIsovalueChangedEvent):
                 isovalue_min = event.isovalue
+            elif isinstance(event, MaxIsovalueChangedEvent):
+                isovalue_max = event.isovalue
             elif isinstance(event, ViewModeChangedEvent):
                 view_mode = event.view_mode
             elif isinstance(event, TransferFunctionImportedEvent):
@@ -195,8 +199,11 @@ def main():
 
         if view_mode == 0:
             shader.set_uniform_vec3("volumeColor", [color[0], color[1], color[2]])
-            normalized_isovalue = isovalue_min/255.0
-            shader.set_uniform1f("isovalueLimit", normalized_isovalue)
+            min_normalized_isovalue = isovalue_min/255.0
+            max_normalized_isovalue = isovalue_max/255.0
+            shader.set_uniform1f("minIsovalueLimit", min_normalized_isovalue)
+            shader.set_uniform1f("maxIsovalueLimit", max_normalized_isovalue)
+
         else:
             transfer_function_manager.bind_tranfer_function(1)
             shader.set_uniform1i("transferFuncTex", 1)

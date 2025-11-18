@@ -25,12 +25,19 @@ class ColorChangedEvent(Event):
     def __repr__(self):
         return f"<ColorChangedEvent color={self.color}>"
 
-class IsovalueChangedEvent(Event):
+class MinIsovalueChangedEvent(Event):
     def __init__(self, isovalue: int):
         self.isovalue = isovalue
 
     def __repr__(self):
-        return f"<IsovalueChangedEvent isovalue={self.isovalue}>"
+        return f"<MinIsovalueChangedEvent isovalue={self.isovalue}>"
+    
+class MaxIsovalueChangedEvent(Event):
+    def __init__(self, isovalue: int):
+        self.isovalue = isovalue
+
+    def __repr__(self):
+        return f"<MaxIsovalueChangedEvent isovalue={self.isovalue}>"
     
 class ViewModeChangedEvent(Event):
     def __init__(self, view_mode: int):

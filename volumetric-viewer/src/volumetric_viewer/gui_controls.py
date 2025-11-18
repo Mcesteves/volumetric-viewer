@@ -4,7 +4,8 @@ from dearpygui import dearpygui as dpg
 
 from volumetric_viewer.event_system import (
     ColorChangedEvent,
-    IsovalueChangedEvent,
+    MaxIsovalueChangedEvent,
+    MinIsovalueChangedEvent,
     NHDRLoadedEvent,
     RawLoadedEvent,
     TransferFunctionExportedEvent,
@@ -56,10 +57,29 @@ def on_color_changed(sender, app_data, user_data):
     if event_queue:
         event_queue.push(ColorChangedEvent(color))
 
-def on_isovalue_changed(sender, app_data, user_data):
+def on_min_isovalue_changed(sender, app_data, user_data):
+    min_val = app_data
+    max_val = dpg.get_value("max_isovalue_slider")
+
+    if min_val >= max_val:
+        min_val = max_val
+        dpg.set_value("min_isovalue_slider", min_val)
+
     event_queue = user_data.get("event_queue")
     if event_queue:
-        event_queue.push(IsovalueChangedEvent(app_data))
+        event_queue.push(MinIsovalueChangedEvent(min_val))
+
+def on_max_isovalue_changed(sender, app_data, user_data):
+    max_val = app_data
+    min_val = dpg.get_value("min_isovalue_slider")
+
+    if max_val <= min_val:
+        max_val = min_val
+        dpg.set_value("max_isovalue_slider", max_val)
+
+    event_queue = user_data.get("event_queue")
+    if event_queue:
+        event_queue.push(MaxIsovalueChangedEvent(max_val))
 
 def import_tf_file (sender, app_data, user_data):
     root = Tk()
@@ -100,7 +120,7 @@ def default_view_settings(event_queue):
         dpg.add_spacer(height=20)
         dpg.add_text("Color:")
         dpg.add_color_picker(
-            default_value=(255, 100, 100, 1.0),
+            default_value=(255, 100, 100),
             no_alpha=True,
             no_side_preview=True,
             display_rgb=True,
@@ -114,10 +134,22 @@ def default_view_settings(event_queue):
         dpg.add_spacer(height=10)
         dpg.add_text("Isovalue Inferior Limit:")
         dpg.add_slider_int(
+            tag="min_isovalue_slider",
             width=400,
             min_value=0,
             max_value=255,
-            callback=on_isovalue_changed,
+            callback=on_min_isovalue_changed,
+            user_data={"event_queue": event_queue}
+        )
+        dpg.add_spacer(height=10)
+        dpg.add_text("Isovalue Superior Limit:")
+        dpg.add_slider_int(
+            tag="max_isovalue_slider",
+            width=400,
+            default_value=255,
+            min_value=0,
+            max_value=255,
+            callback=on_max_isovalue_changed,
             user_data={"event_queue": event_queue}
         )
 
