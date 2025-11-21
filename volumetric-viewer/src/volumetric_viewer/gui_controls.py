@@ -290,7 +290,9 @@ def on_left_click(x, y, event_queue):
     if not (0 <= x <= 255 and 0 <= y <= 1.0):
         return
     tolerance_y = 0.02
-    tolerance_x = 0.5
+    tolerance_x = 0.8
+
+    x = int(x)
 
     for _, (px, py) in enumerate(points):
         if abs(px - x) < tolerance_x and abs(py - y) < tolerance_y:
@@ -308,7 +310,7 @@ def on_left_click(x, y, event_queue):
 def on_right_click(x, y, event_queue):
     print("Right button")
     tolerance_y = 0.02
-    tolerance_x = 0.5
+    tolerance_x = 0.8
 
     for i, (px, py) in enumerate(points):
         if abs(px - x) < tolerance_x and abs(py - y) < tolerance_y:
