@@ -52,7 +52,7 @@ void main() {
         vec4 sampleColor;
 
         if (viewMode == 0) {
-            sampleColor = (density > minIsovalueLimit && density<maxIsovalueLimit) ? vec4(volumeColor, density) : vec4(volumeColor, 0.0);
+            sampleColor = (density > minIsovalueLimit && density < maxIsovalueLimit) ? vec4(volumeColor, density) : vec4(volumeColor, 0.0);
         } else {
             sampleColor = transferFunction(density);
         }

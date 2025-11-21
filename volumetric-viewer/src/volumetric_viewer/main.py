@@ -23,6 +23,7 @@ from volumetric_viewer.event_system import (
     RawLoadedEvent,
     TransferFunctionExportedEvent,
     TransferFunctionImportedEvent,
+    TransferFunctionUpdateEvent,
     ViewModeChangedEvent,
 )
 from volumetric_viewer.gui_controls import run_gui
@@ -58,7 +59,8 @@ def main():
     gui_x = x_pos + width
     gui_y = y_pos
     event_queue = EventQueue()
-    threading.Thread(target=run_gui, args=((gui_x, gui_y), event_queue), daemon=True).start()
+    gui_event_queue = EventQueue()
+    threading.Thread(target=(run_gui), args=((gui_x, gui_y), event_queue, gui_event_queue), daemon=True).start()
 
     camera = ArcballCamera(
         target=glm.vec3(0.5, 0.5, 0.5),
@@ -165,7 +167,8 @@ def main():
                 view_mode = event.view_mode
             elif isinstance(event, TransferFunctionImportedEvent):
                 data = transfer_function_manager.read_file(event.filepath)
-                transfer_function_manager.update_transfer_function(data) 
+                transfer_function_manager.update_transfer_function(data)
+                gui_event_queue.push(TransferFunctionUpdateEvent(data)) 
             elif isinstance(event, TransferFunctionExportedEvent):
                 #transfer_function_manager.write_file(event.filepath)
                 print(event)
@@ -205,7 +208,7 @@ def main():
             shader.set_uniform1f("maxIsovalueLimit", max_normalized_isovalue)
 
         else:
-            transfer_function_manager.bind_tranfer_function(1)
+            transfer_function_manager.bind_transfer_function(1)
             shader.set_uniform1i("transferFuncTex", 1)
 
         renderer.render()

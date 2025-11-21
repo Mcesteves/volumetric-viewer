@@ -59,6 +59,13 @@ class TransferFunctionExportedEvent(Event):
 
     def __repr__(self):
         return f"<TransferFunctionExportedEvent filepath={self.filepath}>"
+    
+class TransferFunctionUpdateEvent(Event):
+    def __init__(self, data: dict):
+        self.data = data
+
+    def __repr__(self):
+        return f"<TransferFunctionUpdatedEvent filepath={self.data}>"
 
 class EventQueue:
     def __init__(self):
