@@ -24,7 +24,7 @@ first_gradient = [
 ]
 second_gradient = [
                     [0, 1.0, 1.0, 0.0],
-                    [150, 0.3, 0.5, 0.5],
+                    [100, 0.0, 1.0, 1.0],
                     [255, 0.0, 0.0, 1.0]
 ]
         
@@ -353,9 +353,9 @@ def clear_points(sender, app_data, user_data):
 def transfer_function_editor(event_queue):
     with dpg.group(tag="transfer_function_editor_group"):
         with dpg.plot(tag="tf_plot", height=300, width=500, no_menus=True, no_box_select=True):
-            dpg.add_plot_axis(dpg.mvXAxis, tag="x_axis", label="Array Value", lock_min=True, lock_max=True)
+            dpg.add_plot_axis(dpg.mvXAxis, tag="x_axis", label="Isovalue", lock_min=True, lock_max=True)
             dpg.set_axis_limits("x_axis", -10, 265)
-            with dpg.plot_axis(dpg.mvYAxis, tag="y_axis", label="Opacity", lock_min=True, lock_max=True):
+            with dpg.plot_axis(dpg.mvYAxis, tag="y_axis", label="Alpha", lock_min=True, lock_max=True):
                 dpg.set_axis_limits("y_axis", -0.1, 1.1)
                 dpg.add_line_series([], [], tag="line_series", label="Interpolation")
                 dpg.add_scatter_series([], [], tag="scatter_series", label="Points")
