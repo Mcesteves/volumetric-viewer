@@ -42,7 +42,7 @@ def main():
     if not glfw.init():
         raise RuntimeError("Failed to initialize GLFW")
 
-    window = glfw.create_window(WINDOW_WIDTH, WINDOW_HEIGHT, "Volume Renderer", None, None)
+    window = glfw.create_window(WINDOW_WIDTH, WINDOW_HEIGHT, "Volumetric Viewer", None, None)
     if not window:
         glfw.terminate()
         raise RuntimeError("Failed to create GLFW window")
@@ -173,7 +173,6 @@ def main():
                 transfer_function_manager.write_file(event.filepath)
             elif isinstance(event, TransferFunctionUpdateEvent):
                 transfer_function_manager.update_transfer_function(event.data)
-                pass
 
         from OpenGL.GL import GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, glClear
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)
