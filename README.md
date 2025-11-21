@@ -2,7 +2,7 @@
 
 Esse software é um visualizador de dados volumétricos cujo principal objetivo é fornecer ao usuário a possibilidade de explorar o dado descobrindo como o volume se distribui em relação a densidade e também testar de forma simples diferentes função de transferência.
 <div style="text-align: center;">
-<img src="images\transfer_function_view_small.png" alt="Lobster Render" width="500"  />
+<img src="images\transfer_function_view_small.png" alt="Lobster Render" width="800"  />
 </div>
 
 ### Informações relevantes
