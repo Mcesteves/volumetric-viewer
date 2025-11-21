@@ -1,18 +1,19 @@
 from tkinter import Tk, filedialog
+
+import numpy as np
 from dearpygui import dearpygui as dpg
 from scipy.interpolate import interp1d
-import numpy as np
 
 from volumetric_viewer.event_system import (
-    ColorChangedEvent,
-    MaxIsovalueChangedEvent,
-    MinIsovalueChangedEvent,
-    NHDRLoadedEvent,
-    RawLoadedEvent,
-    TransferFunctionExportedEvent,
-    TransferFunctionImportedEvent,
-    TransferFunctionUpdateEvent,
-    ViewModeChangedEvent,
+        ColorChangedEvent,
+        MaxIsovalueChangedEvent,
+        MinIsovalueChangedEvent,
+        NHDRLoadedEvent,
+        RawLoadedEvent,
+        TransferFunctionExportedEvent,
+        TransferFunctionImportedEvent,
+        TransferFunctionUpdateEvent,
+        ViewModeChangedEvent,
 )
 
 points = []

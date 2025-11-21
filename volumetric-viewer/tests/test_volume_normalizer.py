@@ -17,7 +17,7 @@ def test_should_normalize_volume():
     normalized_data, scale_factors = normalizer.normalize(
         (reader.dim_x, reader.dim_y, reader.dim_z),
         (reader.spacing_x, reader.spacing_y, reader.spacing_z),
-        reader.data, reader.d_type
+        reader.data
     )
 
     # Check if voxel data is in the range [0, 1]

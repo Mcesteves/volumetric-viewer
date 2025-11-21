@@ -18,6 +18,7 @@ from OpenGL.GL import (
     glTexParameteri,
 )
 
+
 class TransferFunction:
     def __init__(self, size=256):
         self.size = size
