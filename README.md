@@ -53,10 +53,31 @@ Caso ocorre erro, verifique se está na pasta correta (..\volumetric-viewer\volum
 
 ### Ferramentas para desenvolvedores
 
-Nesse projeto, foram utilizadas algumas ferramentas para auxiliar no processo de desenvolvimento.
-
-#### uv
+Nesse projeto, foram utilizadas algumas ferramentas para auxiliar no processo de desenvolvimento. Para utilizá-las, basta rodar os comandos a seguir:
 
 #### Pytest
 
+Para rodar os testes utilizando o Pytest, rode o comando:
+
+```
+uv run pytest
+```
+É recomendado rodar os testes sempre que alguma alteração for feita.
+
+Para mais informações sobre o Pytest, acesse: [Pytest Docs](https://docs.pytest.org/en/stable/)
+
 #### Ruff
+
+Para rodar o ruff para checar possíveis erros, rode o comando:
+
+```
+uvx ruff check
+```
+
+Para rodar o ruff para checar possíveis erros de linting e corrigí-los rode o comando:
+
+```
+uvx ruff check --fix
+```
+
+Para mais informações sobre o Ruff, acesse: [Ruff Docs](https://docs.astral.sh/ruff/)
