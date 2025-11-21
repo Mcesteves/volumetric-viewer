@@ -18,17 +18,17 @@ from volumetric_viewer.event_system import (
 points = []
 first_gradient = [
                     [0, 1.0, 0.0, 0.0],
-                    [20, 0.0, 1.0, 0.0],
+                    [80, 0.0, 1.0, 0.0],
                     [255, 0.0, 0.0, 1.0]
 ]
 second_gradient = [
                     [0, 1.0, 1.0, 0.0],
-                    [100, 0.0, 1.0, 1.0],
+                    [150, 0.3, 0.5, 0.5],
                     [255, 0.0, 0.0, 1.0]
 ]
         
 third_gradient = [
-                    [0, 1.0, 0.0, 1.0],
+                    [0, 0.5, 0.0, 1.0],
                     [100, 0.0, 1.0, 1.0],
                     [255, 1.0, 0.0, 1.0]
 ]
@@ -191,10 +191,7 @@ def export_tf_file(sender, app_data, user_data):
     root.destroy()
 
     if file_path:
-        print(f"Transfer function exported: {file_path}")
         user_data["event_queue"].push(TransferFunctionExportedEvent(file_path))
-    else:
-        print("Cancelled.")
 
 # Function to set up the default view settings
 def default_view_settings(event_queue):
@@ -286,10 +283,9 @@ def mouse_pos_to_plot_coords():
 
 # Function for left-click interaction (add points)
 def on_left_click(x, y, event_queue):
-    print("Left button")
     if not (0 <= x <= 255 and 0 <= y <= 1.0):
         return
-    tolerance_y = 0.02
+    tolerance_y = 0.05
     tolerance_x = 0.8
 
     x = int(x)
@@ -297,7 +293,6 @@ def on_left_click(x, y, event_queue):
     for _, (px, py) in enumerate(points):
         if abs(px - x) < tolerance_x and abs(py - y) < tolerance_y:
             return 
-    print("Adding point")
     points.append((x, y))
     dpg.set_value("selected_point", len(points) - 1) 
     update_transfer_plot()
@@ -308,7 +303,6 @@ def on_left_click(x, y, event_queue):
 
 # Function for right-click interaction (remove points)
 def on_right_click(x, y, event_queue):
-    print("Right button")
     tolerance_y = 0.02
     tolerance_x = 0.8
 
@@ -321,9 +315,7 @@ def on_right_click(x, y, event_queue):
             data["alpha_knots"] = points
             data["color_knots"] = get_gradient_colors(dpg.get_value("gradient_radio"))
             event_queue.push(TransferFunctionUpdateEvent(data))
-            #print(f"Point removed: {i} ({px}, {py})")
             return
-    #print("No point found to remove.")
 
 # Mouse click callback to handle different mouse buttons
 def mouse_click_callback(sender, app_data, user_data):
@@ -354,7 +346,6 @@ def clear_points(sender, app_data, user_data):
     data["alpha_knots"] = points
     data["color_knots"] = get_gradient_colors(dpg.get_value("gradient_radio"))
     user_data["event_queue"].push(TransferFunctionUpdateEvent(data)) 
-    print("All points cleared.")
 
 
 # Function to create the transfer function editor (plot and controls)
