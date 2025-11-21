@@ -166,13 +166,14 @@ def main():
             elif isinstance(event, ViewModeChangedEvent):
                 view_mode = event.view_mode
             elif isinstance(event, TransferFunctionImportedEvent):
-                data = transfer_function_manager.read_file(event.filepath)
+                data = transfer_function_manager.read_file(event.filepath, event.colors)
                 transfer_function_manager.update_transfer_function(data)
                 gui_event_queue.push(TransferFunctionUpdateEvent(data)) 
             elif isinstance(event, TransferFunctionExportedEvent):
-                #transfer_function_manager.write_file(event.filepath)
-                print(event)
-                pass 
+                transfer_function_manager.write_file(event.filepath)
+            elif isinstance(event, TransferFunctionUpdateEvent):
+                transfer_function_manager.update_transfer_function(event.data)
+                pass
 
         from OpenGL.GL import GL_COLOR_BUFFER_BIT, GL_DEPTH_BUFFER_BIT, glClear
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT)

@@ -47,11 +47,12 @@ class ViewModeChangedEvent(Event):
         return f"<ViewModeChangedEvent view_mode={self.view_mode}>"
     
 class TransferFunctionImportedEvent(Event):
-    def __init__(self, filepath: str):
+    def __init__(self, filepath: str, colors: list):
         self.filepath = filepath
+        self.colors = colors
 
     def __repr__(self):
-        return f"<TransferFunctionImportedEvent filepath={self.filepath}>"
+        return f"<TransferFunctionImportedEvent filepath={self.filepath} colors={self.colors}>"
 
 class TransferFunctionExportedEvent(Event):
     def __init__(self, filepath: str):
@@ -65,7 +66,7 @@ class TransferFunctionUpdateEvent(Event):
         self.data = data
 
     def __repr__(self):
-        return f"<TransferFunctionUpdatedEvent filepath={self.data}>"
+        return f"<TransferFunctionUpdatedEvent filepath={self.data}>"    
 
 class EventQueue:
     def __init__(self):
