@@ -41,7 +41,7 @@ E para executar o programa, após a instalação das dependências, rode:
 ```
 uv run volumetric-viewer
 ```
-Caso ocorre erro, verifique se está na pasta correta (..\volumetric-viewer\volumetric-viewer)
+Caso ocorra algum erro, verifique se está na pasta correta (..\volumetric-viewer\volumetric-viewer).
 
 ### Ferramentas para desenvolvedores
 
