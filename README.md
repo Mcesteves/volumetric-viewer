@@ -23,14 +23,6 @@ Esse software é um visualizador de dados volumétricos cujo principal objetivo é 
 
 Esse projeto utiliza o uv para gerenciamento de pacotes e é necessário instalá-lo caso já não o tenha feito. Para instalar o uv, você pode seguir a opção mais apropriada para você no guia oficial de instalação: https://docs.astral.sh/uv/getting-started/installation/
 
-Além disso, o software utiliza a linguagem Python versão 3.13. Para instalar o python você pode utilizar o próprio uv com o comando:
-
-```
-uv python install 3.13
-```
-
-Ou utilizar o instalador oficial no site, com a versão recomendada da 3.13: https://www.python.org/downloads/
-
 ### Preparando o ambiente
 
 Após clonar o repositório, navegar até a pasta ..\volumetric-viewer\volumetric-viewer.
@@ -40,7 +32,7 @@ Com a pasta aberta no terminal, você deve executar o seguinte comando:
 uv sync
 ```
 
-Esse comando vai instalar as dependências necessárias tanto para desenvolvimento quanto para a execução do software.
+Esse comando vai criar um ambiente virtual, instalando todas as dependências necessárias tanto para desenvolvimento quanto para a execução do software, incluindo a versão do Python a ser utilizada.
 
 ### Rodando o visualizador
 
